@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar e Rodar Raylib",
+            "type": "shell",
+            "command": "gcc main.c -o meu_jogo -I/home/samuel/raylib/src -L/home/samuel/raylib/src -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 && export DISPLAY=:1 && ./meu_jogo",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
