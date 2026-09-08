@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <ralyb.h>
+#include <raylib.h>
 int main(void)
 {
     InitWindow(800, 450, "TESTE");
@@ -12,10 +12,10 @@ int main(void)
 
         DrawText(
             "TESTE",
-            250,
-            200,
+            900,
+            500,
             30,
-            BLUE
+            BLACK
         );
 
         EndDrawing();
