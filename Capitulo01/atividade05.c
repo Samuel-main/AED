@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <raylib.h>
 
 #define MAX_PLATAFORMAS 10
 #define VALOR_MIN 0
