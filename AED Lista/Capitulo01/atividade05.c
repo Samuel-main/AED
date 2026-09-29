@@ -116,21 +116,32 @@ int main()
 
     printf("\n=== EXPLORACAO COMPLETA DAS PLATAFORMAS ===\n");
     int altura_total = 0;
+    int *cursor = plataformas;
+    int *fim_mapa = plataformas + tamanho_mapa;
+    int posicao_logica = 0;
 
-    for (int i = 0; i < tamanho_mapa; i++)
+    /* cursor++ avanca para a proxima plataforma; por indice, seria plataformas[i]. */
+    while (cursor < fim_mapa)
     {
-        int valor_atual = *(plataformas + i);
+        int valor_atual = *cursor;
         ponto += valor_atual;
         altura_total += valor_atual;
 
-        printf("Indice: %d | Endereco: %p | Impulso/Ponto: %d\n",
-               i, (void *)(plataformas + i), valor_atual);
+        printf("Posicao logica: %d | Endereco: %p | Impulso/Ponto: %d | Pontuacao: %d\n",
+               posicao_logica, (void *)cursor, valor_atual, ponto);
+
+        cursor++;
+        posicao_logica++;
     }
+
+    printf("\n=== RESUMO DO PERCURSO ===\n");
+    printf("Plataformas visitadas: %d de %d\n", posicao_logica, tamanho_mapa);
+    printf("Altura total percorrida: %d\n", altura_total);
+    printf("Pontuacao acumulada no percurso: %d\n", ponto);
 
     printf("\n**ESTADO FINAL**\n");
     printf("Vida final: %d\n", vida);
     printf("Pontuacao final acumulada: %d\n", ponto);
-    printf("Altura total percorrida: %d\n", altura_total);
 
     return 0;
 }
