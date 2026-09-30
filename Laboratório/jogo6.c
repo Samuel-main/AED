@@ -124,11 +124,11 @@ void desenharEntidade(Entidade *e) {
 }
 
 /* ---- arquivo de TEXTO: histórico de pontuação (fprintf/fscanf) ---- */
-void salvarPlacarTexto(int pontuacao) {
+void salvarPlacarTexto(const char *nomeJogador, int pontuacao) {
     FILE *arquivo = fopen(ARQUIVO_PLACAR, "a"); // "a": anexa ao final, modo texto
     if (arquivo == NULL) return;
 
-    fprintf(arquivo, "%d\n", pontuacao);
+    fprintf(arquivo, "%s %d\n", nomeJogador, pontuacao);
     fclose(arquivo);
 }
 
@@ -137,8 +137,9 @@ int lerMelhorPontuacao(void) {
     FILE *arquivo = fopen(ARQUIVO_PLACAR, "r"); // "r": leitura, modo texto
     if (arquivo == NULL) return 0;
 
+    char nomeLido[16];
     int melhor = 0, valor = 0;
-    while (fscanf(arquivo, "%d", &valor) == 1) {
+    while (fscanf(arquivo, "%15s %d", nomeLido, &valor) == 2) {
         if (valor > melhor) melhor = valor;
     }
     fclose(arquivo);
@@ -187,20 +188,18 @@ bool carregarJogoBinario(void) {
 int main(void) {
     srand((unsigned int)time(NULL));
 
+    char nomeJogador[16];
+    printf("Escreva seu nome: ");
+    scanf("%15s", nomeJogador);
+
     InitWindow(LARGURA_JANELA, ALTURA_JANELA, "Atividade 6 - Manipulacao de Arquivos (texto e binario)");
     SetTargetFPS(60);
 
     Entidade *jogador = criarEntidade(ENTIDADE_JOGADOR,
                                       (Vector2){ LARGURA_JANELA / 2.0f, ALTURA_JANELA / 2.0f });
     adicionarEntidade(jogador);
-        char nomeJogador[16];
-        printf("Escreva Seu nome (Até 16 carcteres)");
-        for (int i = 0; i < 16; i++){
-        scanf("%c", &nomeJogador[i]);
-        GetCharPressed();
-    }
     for (int i = 0; i < TOTAL_INIMIGOS; i++) {
-        Vector2 pos = {tRandomValue(30, LARGURA_JANELA - 30), GetRandomValue(30, ALTURA_JANELA - 30) };
+        Vector2 pos = {GetRandomValue(30, LARGURA_JANELA - 30), GetRandomValue(30, ALTURA_JANELA - 30) };
         adicionarEntidade(criarEntidade(ENTIDADE_INIMIGO, pos));
     }
     for (int i = 0; i < TOTAL_ITENS; i++) {
@@ -236,7 +235,7 @@ int main(void) {
         }
 
         if (IsKeyPressed(KEY_F5)) { // salva a pontuação no arquivo de texto
-            salvarPlacarTexto(pontuacao);
+            salvarPlacarTexto(nomeJogador, pontuacao);
             if (pontuacao > melhorPontuacao) melhorPontuacao = pontuacao;
             TextCopy(mensagem, "Placar salvo em placar.txt!");
             tempoMensagem = 2.0f;
@@ -255,6 +254,12 @@ int main(void) {
             tempoMensagem = 2.0f;
         }
 
+        if (IsKeyPressed(KEY_DELETE)) {
+            bool ok = remove(ARQUIVO_SAVE) == 0;
+            TextCopy(mensagem, ok ? "Save apagado!" : "Nenhum save encontrado");
+            tempoMensagem = 2.0f;
+        }
+
         if (tempoMensagem > 0.0f) tempoMensagem -= GetFrameTime();
 
         BeginDrawing();
@@ -266,7 +271,7 @@ int main(void) {
 
             DrawText(TextFormat("Vida: %d   Pontuacao: %d   Recorde: %d",
                                  jogador->vida, pontuacao, melhorPontuacao), 10, 10, 22, DARKGRAY);
-            DrawText("F5 salva placar (texto) | F6 salva jogo (binario) | F9 carrega jogo (binario)",
+            DrawText("F5 salva placar | F6 salva jogo | F9 carrega jogo | Delete apaga save",
                       10, 34, 18, GRAY);
             DrawText("Setas movem o jogador | ESC sai", 10, ALTURA_JANELA - 25, 16, GRAY);
 
