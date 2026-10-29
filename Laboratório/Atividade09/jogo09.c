@@ -21,8 +21,6 @@
  *   - revisão geral: ponteiros, alocação dinâmica, struct, enum,
  *     union e vetor de ponteiros para struct (agora escondido)
  *
-/*
- * TAD - Tipo Abstrato de Dados com raylib
  * Compilar (Linux):
  *   gcc jogo09.c entidade.c inventario.c -o jogo09 -lraylib -lm -lpthread -ldl -lrt -lX11
  */
