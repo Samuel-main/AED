@@ -30,4 +30,5 @@ bool entidadeColidiu(Entidade *a, Entidade *b);
 void entidadeDesenhar(Entidade *e);
 void entidadeAplicarDano(Entidade *e, int dano);
 
+bool entidadeviva(Entidade *e);
 #endif

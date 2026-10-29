@@ -28,7 +28,7 @@
  */
 
 #include "../raylib.h"
-#include "../Atividade08.c/entidade.h"
+#include "../Atividade08/entidade.h"
 #include "inventario.h"
 #include <stdlib.h>
 #include <time.h>

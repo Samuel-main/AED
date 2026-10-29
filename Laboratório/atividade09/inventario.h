@@ -11,7 +11,7 @@
 #ifndef INVENTARIO_H
 #define INVENTARIO_H
 
-#include "../Atividade08.c/entidade.h"
+#include "../Atividade08/entidade.h"
 
 typedef struct inventario Inventario;
 

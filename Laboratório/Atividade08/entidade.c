@@ -61,3 +61,7 @@ void entidadeAplicarDano(Entidade *e, int dano) {
     e->vida -= dano;
     if (e->vida < 0) e->vida = 0;
 }
+bool entidadeEstaviva(Entidade *e){
+    if(e == NULL)return false;
+    return e->vida > 0;
+}
