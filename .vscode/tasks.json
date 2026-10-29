@@ -4,25 +4,10 @@
     {
       "type": "shell",
       "label": "Compilar Raylib",
-      "command": "/usr/bin/gcc",
+      "command": "bash",
       "args": [
-        "-Wall",
-        "-Wextra",
-        "-g3",
-        "${file}",
-        "${fileDirname}/entidade.c",
-        "-o",
-        "${fileDirname}/output/${fileBasenameNoExtension}",
-        "-I${fileDirname}",
-        "-L${fileDirname}",
-        "-lraylib",
-        "-lGL",
-        "-lm",
-        "-lpthread",
-        "-ldl",
-        "-lrt",
-        "-lX11",
-        "-Wl,-rpath,${fileDirname}"
+        "-lc",
+        "cd \"${workspaceFolder}\" && if [[ \"${fileDirname}\" == *\"/Laboratório/Atividade09\" ]]; then gcc -Wall -Wextra -g3 -I./Laboratório \"${file}\" Laboratório/Atividade08/entidade.c Laboratório/Atividade09/inventario.c -o \"${fileDirname}/output/${fileBasenameNoExtension}\" -lraylib -lGL -lm -lpthread -ldl -lrt -lX11; elif [[ \"${fileDirname}\" == *\"/Laboratório/Atividade08\" ]]; then gcc -Wall -Wextra -g3 -I./Laboratório \"${file}\" \"${fileDirname}/entidade.c\" -o \"${fileDirname}/output/${fileBasenameNoExtension}\" -lraylib -lGL -lm -lpthread -ldl -lrt -lX11; else gcc -Wall -Wextra -g3 -I./Laboratório \"${file}\" -o \"${workspaceFolder}/Laboratório/output/${fileBasenameNoExtension}\" -lraylib -lGL -lm -lpthread -ldl -lrt -lX11; fi"
       ],
       "group": {
         "kind": "build",

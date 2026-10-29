@@ -269,8 +269,8 @@ int main(void) {
                 desenharEntidade(vetorEntidades[i]);
             }
 
-            DrawText(TextFormat("Vida: %d   Pontuacao: %d   Recorde: %d",
-                                 jogador->vida, pontuacao, melhorPontuacao), 10, 10, 22, DARKGRAY);
+            DrawText(TextFormat("Vida: %d  %s Pontuacao: %d   Recorde: %d",
+                                 jogador->vida, nomeJogador, pontuacao, melhorPontuacao), 10, 10, 22, DARKGRAY);
             DrawText("F5 salva placar | F6 salva jogo | F9 carrega jogo | Delete apaga save",
                       10, 34, 18, GRAY);
             DrawText("Setas movem o jogador | ESC sai", 10, ALTURA_JANELA - 25, 16, GRAY);
